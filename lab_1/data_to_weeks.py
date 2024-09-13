@@ -138,7 +138,7 @@ def week_border(data: list[list[str]], index) -> list[str]:
 
 
 def weeks_writer(data: list[list[str]]) -> NoReturn:
-    """A function that splits the original csv file into N files, where each individual file will correspond to one week.
+    """A function that splits the original csv file into N files, where each individual file will correspond to one week
     Args:
         data (list[list[str]]): A list with dates and data
     """

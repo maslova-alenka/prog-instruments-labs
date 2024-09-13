@@ -21,8 +21,10 @@ class DateIterator:
 
                 elif self.counter < len(reader_object):
                     self.counter += 1
-                    output = (reader_object[self.counter - 1][0], reader_object[self.counter - 1][1], reader_object[self.counter - 1][2],
-                                reader_object[self.counter - 1][3], reader_object[self.counter - 1][4], reader_object[self.counter - 1][5], reader_object[self.counter - 1][6])
+                    output = (reader_object[self.counter - 1][0], reader_object[self.counter - 1][1],
+                              reader_object[self.counter - 1][2], reader_object[self.counter - 1][3],
+                              reader_object[self.counter - 1][4], reader_object[self.counter - 1][5],
+                              reader_object[self.counter - 1][6])
                     return output
         else:
             raise FileNotFoundError
@@ -58,8 +60,9 @@ class DateIteratorFromXY:
 
                     reader_object_Y = list(
                         csv.reader(csvfiley, delimiter=","))
-                    output = (date, reader_object_Y[self.counter - 1][0], reader_object_Y[self.counter - 1][1], reader_object_Y[self.counter - 1]
-                                [2], reader_object_Y[self.counter - 1][3], reader_object_Y[self.counter - 1][4], reader_object_Y[self.counter - 1][5])
+                    output = (date, reader_object_Y[self.counter - 1][0], reader_object_Y[self.counter - 1][1],
+                              reader_object_Y[self.counter - 1][2], reader_object_Y[self.counter - 1][3],
+                              reader_object_Y[self.counter - 1][4], reader_object_Y[self.counter - 1][5])
                     return output
             else:
                 raise FileNotFoundError
@@ -93,7 +96,8 @@ class DateIteratorFromWeeks:
         elif self.counter < len(self.data):
             self.counter += 1
             output = (self.data[self.counter - 1][0], self.data[self.counter - 1][1], self.data[self.counter - 1][2],
-                        self.data[self.counter - 1][3], self.data[self.counter - 1][4], self.data[self.counter - 1][5], self.data[self.counter - 1][6])
+                      self.data[self.counter - 1][3], self.data[self.counter - 1][4], self.data[self.counter - 1][5],
+                      self.data[self.counter - 1][6])
             return output
 
 
@@ -125,5 +129,6 @@ class DateIteratorFromYears:
         elif self.counter < len(self.data):
             self.counter += 1
             output = (self.data[self.counter - 1][0], self.data[self.counter - 1][1], self.data[self.counter - 1][2],
-                        self.data[self.counter - 1][3], self.data[self.counter - 1][4], self.data[self.counter - 1][5], self.data[self.counter - 1][6])
+                      self.data[self.counter - 1][3], self.data[self.counter - 1][4], self.data[self.counter - 1][5],
+                      self.data[self.counter - 1][6])
             return output

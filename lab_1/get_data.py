@@ -124,8 +124,10 @@ class DateIterator:
 
                 elif self.counter < len(reader_object):
                     self.counter += 1
-                    output = (reader_object[self.counter - 1][0], reader_object[self.counter - 1][1], reader_object[self.counter - 1][2],
-                                reader_object[self.counter - 1][3], reader_object[self.counter - 1][4], reader_object[self.counter - 1][5], reader_object[self.counter - 1][6])
+                    output = (reader_object[self.counter - 1][0], reader_object[self.counter - 1][1],
+                              reader_object[self.counter - 1][2], reader_object[self.counter - 1][3],
+                              reader_object[self.counter - 1][4], reader_object[self.counter - 1][5],
+                              reader_object[self.counter - 1][6])
                     return output
         else:
             raise FileNotFoundError

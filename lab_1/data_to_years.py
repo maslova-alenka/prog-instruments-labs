@@ -55,7 +55,7 @@ def data_to_years(file_name: str) -> NoReturn:
         if not os.path.exists('data_to_years_output'):
             os.mkdir('data_to_years_output')
 
-        with open(file_name, 'r', encoding='utf-8') as csvfile:
+        with (open(file_name, 'r', encoding='utf-8') as csvfile):
             reader_object = list(csv.reader(csvfile, delimiter=","))
 
             output = []
@@ -79,7 +79,8 @@ def data_to_years(file_name: str) -> NoReturn:
                         second_part_of_name = reader_object[i][0]
 
                     elif get_year_from_data(reader_object, i) != current_year:
-                        with open(name_for_file(first_part_of_name, second_part_of_name), 'w', encoding='utf-8') as csv_file:
+                        with open(name_for_file(first_part_of_name, second_part_of_name), 'w',
+                                  encoding='utf-8') as csv_file:
                             writer = csv.writer(
                                 csv_file, lineterminator='\n')
                             current_year += get_year_from_data(
@@ -97,7 +98,8 @@ def data_to_years(file_name: str) -> NoReturn:
                     second_part_of_name = reader_object[i][0]
 
                     if i + 1 == len(reader_object):
-                        with open(name_for_file(first_part_of_name, second_part_of_name), 'w', encoding='utf-8') as csv_file:
+                        with open(name_for_file(first_part_of_name, second_part_of_name), 'w',
+                                  encoding='utf-8') as csv_file:
                             writer = csv.writer(
                                 csv_file, lineterminator='\n')
                             for j in output:
