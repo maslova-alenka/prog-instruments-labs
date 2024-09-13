@@ -142,47 +142,6 @@ if __name__ == '__main__':
         invalid_date = datetime.date(2222, 5, 20)
 
         obj = DateIterator()
-        
-        # print(next(obj))
-
-        # print(next(obj))
-
-        # print(next(obj))
-        
-        # while(True):
-        #     print(next(obj))
-
-        # # демонстрация работы функции с валидной датой
-        # result = get_data_from_x_y(file_name_x, file_name_y, date)
-        # print(result)
-
-        # # демонстрация работы функции с невалидной датой
-        # result = get_data_from_x_y(file_name_x, file_name_y, invalid_date)
-        # print(result)
-
-        # # демонстрация работы функции с валидной датой
-        # result = get_data_from_years_and_weeks(folder_name_years, date)
-        # print(result)
-
-        # # демонстрация работы функции с невалидной датой
-        # result = get_data_from_years_and_weeks(folder_name_years, invalid_date)
-        # print(result)
-
-        # # демонстрация работы функции с валидной датой
-        # result = get_data_from_years_and_weeks(folder_name_weeks, date)
-        # print(result)
-
-        # # демонстрация работы функции с невалидной датой
-        # result = get_data_from_years_and_weeks(folder_name_weeks, invalid_date)
-        # print(result)
-
-        # # демонстрация работы функции с валидной датой
-        # result = get_data(file_name, date)
-        # print(result)
-
-        # # демонстрация работы функции с невалидной датой
-        # result = get_data(file_name, invalid_date)
-        # print(result)
 
     except FileNotFoundError:
         print('No such file exists!')
