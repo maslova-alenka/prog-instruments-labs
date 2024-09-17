@@ -46,14 +46,15 @@ def get_data_from_years_and_weeks(folder_name: str, date: datetime.date) -> list
         FileNotFoundError: Folder with .csv files is missing
 
     Returns:
-        list[str] or None: list[str] or None: returns list[str] if data for the date was found, or returns None on failure
+        list[str] or None: list[str] or None: returns list[str] if data for the date was found, or returns None on
+        failure
     """
     if os.path.exists(folder_name):
         index = -1
         for root, dirs, files in os.walk(folder_name):
             for file in files:
-                with open(os.path.join(folder_name, file), "r", encoding="utf-8") as csvfile:
-                    dates = list(csv.reader(csvfile, delimiter=","))
+                with open(os.path.join(folder_name, file), "r", encoding="utf-8") as csv_file:
+                    dates = list(csv.reader(csv_file, delimiter=","))
                     for i in range(len(dates)):
                         if dates[i][0] == str(date):
                             index = i
@@ -76,11 +77,12 @@ def get_data(file_name: str, date: datetime.date) -> list[str] or None:
         FileNotFoundError: .csv file is missing
 
     Returns:
-        list[str] or None: list[str] or None: returns list[str] if data for the date was found, or returns None on failure
+        list[str] or None: list[str] or None: returns list[str] if data for the date was found, or returns None on
+        failure
     """
     if os.path.exists(file_name):
-        with open(file_name, "r", encoding="utf-8") as csvfile:
-            reader_object = list(csv.reader(csvfile, delimiter=","))
+        with open(file_name, "r", encoding="utf-8") as csv_file:
+            reader_object = list(csv.reader(csv_file, delimiter=","))
             for i in range(len(reader_object)):
                 if reader_object[i][0] == str(date):
                     return reader_object[i][1:]
@@ -106,8 +108,8 @@ class DateIterator:
             FileNotFoundError: If the file does not exist.
         """
         if os.path.exists(self.file_name):
-            with open(self.file_name, "r", encoding="utf-8") as csvfile:
-                reader_object = list(csv.reader(csvfile, delimiter=","))
+            with open(self.file_name, "r", encoding="utf-8") as csv_file:
+                reader_object = list(csv.reader(csv_file, delimiter=","))
                 if self.counter == len(reader_object):
                     raise StopIteration
                 elif self.counter < len(reader_object):

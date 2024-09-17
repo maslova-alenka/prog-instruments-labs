@@ -16,8 +16,8 @@ def divide_data(file_name: str) -> NoReturn:
     if os.path.exists(file_name):
         if not os.path.exists("divide_data_output"):
             os.mkdir("divide_data_output")
-        with open(file_name, "r", encoding="utf-8") as csvfile:
-            reader_object = list(csv.reader(csvfile, delimiter=","))
+        with open(file_name, "r", encoding="utf-8") as csv_file:
+            reader_object = list(csv.reader(csv_file, delimiter=","))
             with open("divide_data_output//X.csv", "w", encoding="utf-8") as csvfile:
                 writer = csv.writer(csvfile, lineterminator="\n")
                 for elements in reader_object:
@@ -27,8 +27,7 @@ def divide_data(file_name: str) -> NoReturn:
                 writer = csv.writer(csvfile, lineterminator="\n")
                 for elements in reader_object:
                     writer = csv.writer(csvfile, lineterminator="\n")
-                    writer.writerow((
-                        elements[1], elements[2], elements[3], elements[4], elements[5], elements[6],))
+                    writer.writerow((elements[1], elements[2], elements[3], elements[4], elements[5], elements[6],))
     else:
         raise FileNotFoundError
 

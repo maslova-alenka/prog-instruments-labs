@@ -84,7 +84,7 @@ def name_for_file(first_part: str, second_part: str) -> str:
     return os.path.join("data_to_weeks_output", f_p + s_p)
 
 
-def week_border(data: list[list[str]], index) -> list[str]:
+def week_border(data: list[list[str]], index: int) -> list[str]:
     """A function that makes a list consisting of the days of one week
     Args:
         data (list[list[str]]): A list with dates and data
@@ -93,8 +93,8 @@ def week_border(data: list[list[str]], index) -> list[str]:
     Returns:
         list[str]: A list of the days of one week
     """
-    date = datetime.date(get_year_from_data(data, index), get_month_from_data(
-        data, index), get_day_from_data(data, index))
+    date = datetime.date(get_year_from_data(data, index),
+                         get_month_from_data(data, index), get_day_from_data(data, index))
     weekday = date.isoweekday()
     week = []
     if weekday == 1:
@@ -142,13 +142,13 @@ def weeks_writer(data: list[list[str]]) -> NoReturn:
             with open(name_for_file(first_part_of_name, second_part_of_name), "w", encoding="utf-8") as csv_file:
                 writer = csv.writer(csv_file, lineterminator="\n")
                 for j in output:
-                    writer.writerow((j))
+                    writer.writerow(j)
                 output = []
                 output.append(data[i])
                 first_part_of_name = data[i][0]
 
 
-def data_to_weeks(file_name: str):
+def data_to_weeks(file_name: str) -> NoReturn:
     """Function that reads the csv file
 
     Args:
@@ -160,8 +160,8 @@ def data_to_weeks(file_name: str):
     if os.path.exists(file_name):
         if not os.path.exists("data_to_weeks_output"):
             os.mkdir("data_to_weeks_output")
-        with open(file_name, "r", encoding="utf-8") as csvfile:
-            reader_object = list(csv.reader(csvfile, delimiter=","))
+        with open(file_name, "r", encoding="utf-8") as csv_file:
+            reader_object = list(csv.reader(csv_file, delimiter=","))
             weeks_writer(reader_object)
     else:
         raise FileNotFoundError

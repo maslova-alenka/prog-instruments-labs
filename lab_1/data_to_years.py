@@ -72,12 +72,10 @@ def data_to_years(file_name: str) -> NoReturn:
                     elif get_year_from_data(reader_object, i) != current_year:
                         with open(name_for_file(first_part_of_name, second_part_of_name), "w",
                                   encoding="utf-8") as csv_file:
-                            writer = csv.writer(
-                                csv_file, lineterminator="\n")
-                            current_year += get_year_from_data(
-                                reader_object, i) - get_year_from_data(output, 0)
+                            writer = csv.writer(csv_file, lineterminator="\n")
+                            current_year += get_year_from_data(reader_object, i) - get_year_from_data(output, 0)
                             for j in output:
-                                writer.writerow((j))
+                                writer.writerow(j)
                             output = []
                             first_part_of_name = reader_object[i][0]
                             output.append(reader_object[i])
@@ -87,10 +85,9 @@ def data_to_years(file_name: str) -> NoReturn:
                     if i + 1 == len(reader_object):
                         with open(name_for_file(first_part_of_name, second_part_of_name), "w",
                                   encoding="utf-8") as csv_file:
-                            writer = csv.writer(
-                                csv_file, lineterminator="\n")
+                            writer = csv.writer(csv_file, lineterminator="\n")
                             for j in output:
-                                writer.writerow((j))
+                                writer.writerow(j)
     else:
         raise FileNotFoundError
 

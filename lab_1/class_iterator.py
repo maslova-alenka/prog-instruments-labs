@@ -58,13 +58,11 @@ class DateIteratorFromXY:
                 raise StopIteration
             elif self.counter < len(reader_object):
                 self.counter += 1
-                with open(self.x, "r", encoding="utf-8") as csvfilex:
-                    reader_object_x = list(
-                        csv.reader(csvfilex, delimiter=","))
+                with open(self.x, "r", encoding="utf-8") as csv_file_x:
+                    reader_object_x = list(csv.reader(csv_file_x, delimiter=","))
                     date = reader_object_x[self.counter][0]
-                with open(self.y, "r", encoding="utf-8") as csvfiley:
-                    reader_object_y = list(
-                        csv.reader(csvfiley, delimiter=","))
+                with open(self.y, "r", encoding="utf-8") as csv_file_y:
+                    reader_object_y = list(csv.reader(csv_file_y, delimiter=","))
                     output = (date, reader_object_y[self.counter - 1][0], reader_object_y[self.counter - 1][1],
                               reader_object_y[self.counter - 1][2], reader_object_y[self.counter - 1][3],
                               reader_object_y[self.counter - 1][4], reader_object_y[self.counter - 1][5])
@@ -83,8 +81,8 @@ class DateIteratorFromWeeks:
         if os.path.exists(self.file_name):
             for root, dirs, files in os.walk(self.file_name):
                 for file in files:
-                    with open(os.path.join(self.file_name, file), "r", encoding="utf-8") as csvfile:
-                        dates = list(csv.reader(csvfile, delimiter=","))
+                    with open(os.path.join(self.file_name, file), "r", encoding="utf-8") as csv_file:
+                        dates = list(csv.reader(csv_file, delimiter=","))
                         for i in range(len(dates)):
                             self.data.append(dates[i])
         else:
@@ -120,8 +118,8 @@ class DateIteratorFromYears:
         if os.path.exists(self.file_name):
             for root, dirs, files in os.walk(self.file_name):
                 for file in files:
-                    with open(os.path.join(self.file_name, file), "r", encoding="utf-8") as csvfile:
-                        dates = list(csv.reader(csvfile, delimiter=","))
+                    with open(os.path.join(self.file_name, file), "r", encoding="utf-8") as csv_file:
+                        dates = list(csv.reader(csv_file, delimiter=","))
                         for i in range(len(dates)):
                             self.data.append(dates[i])
         else:
