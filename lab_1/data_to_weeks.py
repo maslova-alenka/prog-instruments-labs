@@ -16,9 +16,9 @@ def get_year_from_data(data: list[list[str]], index: int) -> int:
         int: Value of year
     """
     date = data[index][0]
-    year = ''
+    year = ""
     for numbers in date:
-        if numbers != '-':
+        if numbers != "-":
             year += numbers
         else:
             break
@@ -35,10 +35,10 @@ def get_month_from_data(data: list[list[str]], index: int) -> int:
         int: Value of month
     """
     date = data[index][0]
-    month = ''
+    month = ""
     dash_counter = 0
     for numbers in date:
-        if numbers == '-':
+        if numbers == "-":
             dash_counter += 1
             continue
         if dash_counter == 1:
@@ -59,10 +59,10 @@ def get_day_from_data(data: list[list[str]], index: int) -> int:
         int: Value of day
     """
     date = data[index][0]
-    day = ''
+    day = ""
     dash_counter = 0
     for numbers in date:
-        if numbers == '-':
+        if numbers == "-":
             dash_counter += 1
             continue
         if dash_counter == 2:
@@ -74,14 +74,14 @@ def name_for_file(first_part: str, second_part: str) -> str:
     """Creates a name for file
 
     Args:
-        first_part (str): First part of future file's name
-        second_part (str): Second part of future file's name
+        first_part (str): First part of future file"s name
+        second_part (str): Second part of future file"s name
     Returns:
         str: Name in special format
     """
-    f_p = first_part.replace('-', '') + '_'
-    s_p = second_part.replace('-', '') + '.csv'
-    return os.path.join('data_to_weeks_output', f_p + s_p)
+    f_p = first_part.replace("-", "") + "_"
+    s_p = second_part.replace("-", "") + ".csv"
+    return os.path.join("data_to_weeks_output", f_p + s_p)
 
 
 def week_border(data: list[list[str]], index) -> list[str]:
@@ -121,8 +121,8 @@ def weeks_writer(data: list[list[str]]) -> NoReturn:
     Args:
         data (list[list[str]]): A list with dates and data
     """
-    first_part_of_name = ''
-    second_part_of_name = ''
+    first_part_of_name = ""
+    second_part_of_name = ""
     output = []
     border = week_border(data, 0)
     is_first = True
@@ -139,8 +139,8 @@ def weeks_writer(data: list[list[str]]) -> NoReturn:
                 break
         if day_in_week == False:
             border = week_border(data, i)
-            with open(name_for_file(first_part_of_name, second_part_of_name), 'w', encoding='utf-8') as csv_file:
-                writer = csv.writer(csv_file, lineterminator='\n')
+            with open(name_for_file(first_part_of_name, second_part_of_name), "w", encoding="utf-8") as csv_file:
+                writer = csv.writer(csv_file, lineterminator="\n")
                 for j in output:
                     writer.writerow((j))
                 output = []
@@ -158,18 +158,18 @@ def data_to_weeks(file_name: str):
         FileNotFoundError: File does not exist
     """
     if os.path.exists(file_name):
-        if not os.path.exists('data_to_weeks_output'):
-            os.mkdir('data_to_weeks_output')
-        with open(file_name, 'r', encoding='utf-8') as csvfile:
+        if not os.path.exists("data_to_weeks_output"):
+            os.mkdir("data_to_weeks_output")
+        with open(file_name, "r", encoding="utf-8") as csvfile:
             reader_object = list(csv.reader(csvfile, delimiter=","))
             weeks_writer(reader_object)
     else:
         raise FileNotFoundError
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
-        file_name = 'result.csv'
+        file_name = "result.csv"
         data_to_weeks(file_name)
     except FileNotFoundError:
-        print('No such file exists!')
+        print("No such file exists!")

@@ -7,7 +7,7 @@ class DateIterator:
     def __init__(self):
         """Initialize the DateIterator."""
         self.counter = 0
-        self.file_name = 'result.csv'
+        self.file_name = "result.csv"
 
     def __next__(self) -> tuple:
         """Get the next tuple of data from the CSV file.
@@ -19,7 +19,7 @@ class DateIterator:
             FileNotFoundError: If the file does not exist.
         """
         if os.path.exists(self.file_name):
-            with open(self.file_name, 'r', encoding='utf-8') as csvfile:
+            with open(self.file_name, "r", encoding="utf-8") as csvfile:
                 reader_object = list(csv.reader(csvfile, delimiter=","))
                 if self.counter == len(reader_object):
                     raise StopIteration
@@ -39,8 +39,8 @@ class DateIteratorFromXY:
     def __init__(self):
         """Initialize the DateIteratorFromXY."""
         self.counter = 0
-        self.x = 'divide_data_output//X.csv'
-        self.y = 'divide_data_output//Y.csv'
+        self.x = "divide_data_output//X.csv"
+        self.y = "divide_data_output//Y.csv"
 
     def __next__(self) -> tuple:
         """Get the next tuple of data from X and Y CSV files.
@@ -52,17 +52,17 @@ class DateIteratorFromXY:
             FileNotFoundError: If the files do not exist.
         """
         if os.path.exists(self.x) and os.path.exists(self.y):
-            with open(self.x, 'r', encoding='utf-8') as csvfile:
+            with open(self.x, "r", encoding="utf-8") as csvfile:
                 reader_object = list(csv.reader(csvfile, delimiter=","))
             if self.counter == len(reader_object):
                 raise StopIteration
             elif self.counter < len(reader_object):
                 self.counter += 1
-                with open(self.x, 'r', encoding='utf-8') as csvfilex:
+                with open(self.x, "r", encoding="utf-8") as csvfilex:
                     reader_object_x = list(
                         csv.reader(csvfilex, delimiter=","))
                     date = reader_object_x[self.counter][0]
-                with open(self.y, 'r', encoding='utf-8') as csvfiley:
+                with open(self.y, "r", encoding="utf-8") as csvfiley:
                     reader_object_y = list(
                         csv.reader(csvfiley, delimiter=","))
                     output = (date, reader_object_y[self.counter - 1][0], reader_object_y[self.counter - 1][1],
@@ -77,13 +77,13 @@ class DateIteratorFromWeeks:
     """Iterator for reading data from weekly CSV files."""
     def __init__(self):
         """Initialize the DateIteratorFromWeeks."""
-        self.file_name = 'data_to_weeks_output'
+        self.file_name = "data_to_weeks_output"
         self.counter = 0
         self.data = []
         if os.path.exists(self.file_name):
             for root, dirs, files in os.walk(self.file_name):
                 for file in files:
-                    with open(os.path.join(self.file_name, file), 'r', encoding='utf-8') as csvfile:
+                    with open(os.path.join(self.file_name, file), "r", encoding="utf-8") as csvfile:
                         dates = list(csv.reader(csvfile, delimiter=","))
                         for i in range(len(dates)):
                             self.data.append(dates[i])
@@ -114,13 +114,13 @@ class DateIteratorFromYears:
     """Iterator for reading data from yearly CSV files."""
     def __init__(self):
         """Initialize the DateIteratorFromYears."""
-        self.file_name = 'data_to_years_output'
+        self.file_name = "data_to_years_output"
         self.counter = 0
         self.data = []
         if os.path.exists(self.file_name):
             for root, dirs, files in os.walk(self.file_name):
                 for file in files:
-                    with open(os.path.join(self.file_name, file), 'r', encoding='utf-8') as csvfile:
+                    with open(os.path.join(self.file_name, file), "r", encoding="utf-8") as csvfile:
                         dates = list(csv.reader(csvfile, delimiter=","))
                         for i in range(len(dates)):
                             self.data.append(dates[i])

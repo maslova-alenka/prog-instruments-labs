@@ -8,14 +8,14 @@ def name_for_file(first_part: str, second_part: str) -> str:
     """Creates a name for file
 
     Args:
-        first_part (str): First part of future file's name
-        second_part (str): Second part of future file's name
+        first_part (str): First part of future file"s name
+        second_part (str): Second part of future file"s name
     Returns:
         str: Name in special format
     """
-    f_p = first_part.replace('-', '') + '_'
-    s_p = second_part.replace('-', '') + '.csv'
-    return os.path.join('data_to_years_output', f_p + s_p)
+    f_p = first_part.replace("-", "") + "_"
+    s_p = second_part.replace("-", "") + ".csv"
+    return os.path.join("data_to_years_output", f_p + s_p)
 
 
 def get_year_from_data(data: list[list[str]], index: int) -> int:
@@ -29,9 +29,9 @@ def get_year_from_data(data: list[list[str]], index: int) -> int:
         int: Value of year
     """
     date = data[index][0]
-    year = ''
+    year = ""
     for numbers in date:
-        if numbers != '-':
+        if numbers != "-":
             year += numbers
         else:
             break
@@ -48,13 +48,13 @@ def data_to_years(file_name: str) -> NoReturn:
         TypeError: No such file exists
     """
     if os.path.exists(file_name):
-        if not os.path.exists('data_to_years_output'):
-            os.mkdir('data_to_years_output')
-        with (open(file_name, 'r', encoding='utf-8') as csvfile):
+        if not os.path.exists("data_to_years_output"):
+            os.mkdir("data_to_years_output")
+        with (open(file_name, "r", encoding="utf-8") as csvfile):
             reader_object = list(csv.reader(csvfile, delimiter=","))
             output = []
-            first_part_of_name = ''
-            second_part_of_name = ''
+            first_part_of_name = ""
+            second_part_of_name = ""
             is_first = True
             current_year = get_year_from_data(reader_object, 0)
             last_year = get_year_from_data(
@@ -70,10 +70,10 @@ def data_to_years(file_name: str) -> NoReturn:
                         second_part_of_name = reader_object[i][0]
 
                     elif get_year_from_data(reader_object, i) != current_year:
-                        with open(name_for_file(first_part_of_name, second_part_of_name), 'w',
-                                  encoding='utf-8') as csv_file:
+                        with open(name_for_file(first_part_of_name, second_part_of_name), "w",
+                                  encoding="utf-8") as csv_file:
                             writer = csv.writer(
-                                csv_file, lineterminator='\n')
+                                csv_file, lineterminator="\n")
                             current_year += get_year_from_data(
                                 reader_object, i) - get_year_from_data(output, 0)
                             for j in output:
@@ -85,19 +85,19 @@ def data_to_years(file_name: str) -> NoReturn:
                     output.append(reader_object[i])
                     second_part_of_name = reader_object[i][0]
                     if i + 1 == len(reader_object):
-                        with open(name_for_file(first_part_of_name, second_part_of_name), 'w',
-                                  encoding='utf-8') as csv_file:
+                        with open(name_for_file(first_part_of_name, second_part_of_name), "w",
+                                  encoding="utf-8") as csv_file:
                             writer = csv.writer(
-                                csv_file, lineterminator='\n')
+                                csv_file, lineterminator="\n")
                             for j in output:
                                 writer.writerow((j))
     else:
         raise FileNotFoundError
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
-        file_name = 'result.csv'
+        file_name = "result.csv"
         data_to_years(file_name)
     except FileNotFoundError:
-        print('No such file exists!')
+        print("No such file exists!")
