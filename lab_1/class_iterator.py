@@ -3,11 +3,21 @@ import os
 
 
 class DateIterator:
+    """Iterator for reading data from a CSV file."""
     def __init__(self):
+        """Initialize the DateIterator."""
         self.counter = 0
         self.file_name = 'result.csv'
 
     def __next__(self) -> tuple:
+        """Get the next tuple of data from the CSV file.
+        Returns:
+            tuple: A tuple of data from the CSV file.
+
+        Raises:
+            StopIteration: When the end of the file is reached.
+            FileNotFoundError: If the file does not exist.
+        """
         if os.path.exists(self.file_name):
             with open(self.file_name, 'r', encoding='utf-8') as csvfile:
                 reader_object = list(csv.reader(csvfile, delimiter=","))
@@ -25,12 +35,22 @@ class DateIterator:
 
 
 class DateIteratorFromXY:
+    """Iterator for reading data from X and Y CSV files."""
     def __init__(self):
+        """Initialize the DateIteratorFromXY."""
         self.counter = 0
         self.x = 'divide_data_output//X.csv'
         self.y = 'divide_data_output//Y.csv'
 
     def __next__(self) -> tuple:
+        """Get the next tuple of data from X and Y CSV files.
+        Returns:
+            tuple: A tuple of data from X and Y CSV files.
+
+        Raises:
+            StopIteration: When the end of the file is reached.
+            FileNotFoundError: If the files do not exist.
+        """
         if os.path.exists(self.x) and os.path.exists(self.y):
             with open(self.x, 'r', encoding='utf-8') as csvfile:
                 reader_object = list(csv.reader(csvfile, delimiter=","))
@@ -54,7 +74,9 @@ class DateIteratorFromXY:
 
 
 class DateIteratorFromWeeks:
+    """Iterator for reading data from weekly CSV files."""
     def __init__(self):
+        """Initialize the DateIteratorFromWeeks."""
         self.file_name = 'data_to_weeks_output'
         self.counter = 0
         self.data = []
@@ -69,6 +91,15 @@ class DateIteratorFromWeeks:
             raise FileNotFoundError
 
     def __next__(self) -> tuple:
+        """Get the next tuple of data from weekly CSV files.
+
+        Returns:
+            tuple: A tuple of data from weekly CSV files.
+
+        Raises:
+            StopIteration: When the end of the file is reached.
+            FileNotFoundError: If the files do not exist.
+        """
         if self.counter == len(self.data):
             raise StopIteration
         elif self.counter < len(self.data):
@@ -80,7 +111,9 @@ class DateIteratorFromWeeks:
 
 
 class DateIteratorFromYears:
+    """Iterator for reading data from yearly CSV files."""
     def __init__(self):
+        """Initialize the DateIteratorFromYears."""
         self.file_name = 'data_to_years_output'
         self.counter = 0
         self.data = []
@@ -95,6 +128,15 @@ class DateIteratorFromYears:
             raise FileNotFoundError
 
     def __next__(self) -> tuple:
+        """Get the next tuple of data from yearly CSV files.
+
+        Returns:
+            tuple: A tuple of data from yearly CSV files.
+
+        Raises:
+            StopIteration: When the end of the file is reached.
+            FileNotFoundError: If the files do not exist.
+        """
         if self.counter == len(self.data):
             raise StopIteration
         elif self.counter < len(self.data):

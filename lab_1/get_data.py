@@ -39,7 +39,7 @@ def get_data_from_years_and_weeks(folder_name: str, date: datetime.date) -> list
     """Function finds information about date from csv files that contains data 
 
     Args:
-        folder_name_years (str): Path to folder that contains .csv files
+        folder_name (str): Path to folder that contains .csv files
         date (datetime.date): The date for which you want to find weather data
 
     Raises:
