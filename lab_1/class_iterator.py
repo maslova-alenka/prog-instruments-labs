@@ -4,21 +4,16 @@ import os
 
 
 class DateIterator:
-
     def __init__(self):
-
         self.counter = 0
         self.file_name = 'result.csv'
 
     def __next__(self) -> tuple:
-
         if os.path.exists(self.file_name):
             with open(self.file_name, 'r', encoding='utf-8') as csvfile:
                 reader_object = list(csv.reader(csvfile, delimiter=","))
-
                 if self.counter == len(reader_object):
                     raise StopIteration
-
                 elif self.counter < len(reader_object):
                     self.counter += 1
                     output = (reader_object[self.counter - 1][0], reader_object[self.counter - 1][1],
@@ -31,33 +26,24 @@ class DateIterator:
 
 
 class DateIteratorFromXY:
-
     def __init__(self):
-
         self.counter = 0
         self.x = 'divide_data_output//X.csv'
         self.y = 'divide_data_output//Y.csv'
 
     def __next__(self) -> tuple:
-
         if os.path.exists(self.x) and os.path.exists(self.y):
-
             with open(self.x, 'r', encoding='utf-8') as csvfile:
                 reader_object = list(csv.reader(csvfile, delimiter=","))
-
             if self.counter == len(reader_object):
                 raise StopIteration
-
             elif self.counter < len(reader_object):
                 self.counter += 1
                 with open(self.x, 'r', encoding='utf-8') as csvfilex:
-
                     reader_object_x = list(
                         csv.reader(csvfilex, delimiter=","))
                     date = reader_object_x[self.counter][0]
-
                 with open(self.y, 'r', encoding='utf-8') as csvfiley:
-
                     reader_object_y = list(
                         csv.reader(csvfiley, delimiter=","))
                     output = (date, reader_object_y[self.counter - 1][0], reader_object_y[self.counter - 1][1],
@@ -70,29 +56,22 @@ class DateIteratorFromXY:
 
 class DateIteratorFromWeeks:
     def __init__(self):
-
         self.file_name = 'data_to_weeks_output'
         self.counter = 0
         self.data = []
-
         if os.path.exists(self.file_name):
-
             for root, dirs, files in os.walk(self.file_name):
                 for file in files:
-
                     with open(os.path.join(self.file_name, file), 'r', encoding='utf-8') as csvfile:
                         dates = list(csv.reader(csvfile, delimiter=","))
-
                         for i in range(len(dates)):
                             self.data.append(dates[i])
         else:
             raise FileNotFoundError
 
     def __next__(self) -> tuple:
-
         if self.counter == len(self.data):
             raise StopIteration
-
         elif self.counter < len(self.data):
             self.counter += 1
             output = (self.data[self.counter - 1][0], self.data[self.counter - 1][1], self.data[self.counter - 1][2],
@@ -103,29 +82,22 @@ class DateIteratorFromWeeks:
 
 class DateIteratorFromYears:
     def __init__(self):
-
         self.file_name = 'data_to_years_output'
         self.counter = 0
         self.data = []
-
         if os.path.exists(self.file_name):
-
             for root, dirs, files in os.walk(self.file_name):
                 for file in files:
-
                     with open(os.path.join(self.file_name, file), 'r', encoding='utf-8') as csvfile:
                         dates = list(csv.reader(csvfile, delimiter=","))
-
                         for i in range(len(dates)):
                             self.data.append(dates[i])
         else:
             raise FileNotFoundError
 
     def __next__(self) -> tuple:
-
         if self.counter == len(self.data):
             raise StopIteration
-
         elif self.counter < len(self.data):
             self.counter += 1
             output = (self.data[self.counter - 1][0], self.data[self.counter - 1][1], self.data[self.counter - 1][2],
