@@ -35,14 +35,14 @@ class DateIteratorFromXY:
     def __init__(self):
 
         self.counter = 0
-        self.X = 'divide_data_output//X.csv'
-        self.Y = 'divide_data_output//Y.csv'
+        self.x = 'divide_data_output//X.csv'
+        self.y = 'divide_data_output//Y.csv'
 
     def __next__(self) -> tuple:
 
-        if os.path.exists(self.X) and os.path.exists(self.Y):
+        if os.path.exists(self.x) and os.path.exists(self.y):
 
-            with open(self.X, 'r', encoding='utf-8') as csvfile:
+            with open(self.x, 'r', encoding='utf-8') as csvfile:
                 reader_object = list(csv.reader(csvfile, delimiter=","))
 
             if self.counter == len(reader_object):
@@ -50,19 +50,19 @@ class DateIteratorFromXY:
 
             elif self.counter < len(reader_object):
                 self.counter += 1
-                with open(self.X, 'r', encoding='utf-8') as csvfilex:
+                with open(self.x, 'r', encoding='utf-8') as csvfilex:
 
-                    reader_object_X = list(
+                    reader_object_x = list(
                         csv.reader(csvfilex, delimiter=","))
-                    date = reader_object_X[self.counter][0]
+                    date = reader_object_x[self.counter][0]
 
-                with open(self.Y, 'r', encoding='utf-8') as csvfiley:
+                with open(self.y, 'r', encoding='utf-8') as csvfiley:
 
-                    reader_object_Y = list(
+                    reader_object_y = list(
                         csv.reader(csvfiley, delimiter=","))
-                    output = (date, reader_object_Y[self.counter - 1][0], reader_object_Y[self.counter - 1][1],
-                              reader_object_Y[self.counter - 1][2], reader_object_Y[self.counter - 1][3],
-                              reader_object_Y[self.counter - 1][4], reader_object_Y[self.counter - 1][5])
+                    output = (date, reader_object_y[self.counter - 1][0], reader_object_y[self.counter - 1][1],
+                              reader_object_y[self.counter - 1][2], reader_object_y[self.counter - 1][3],
+                              reader_object_y[self.counter - 1][4], reader_object_y[self.counter - 1][5])
                     return output
             else:
                 raise FileNotFoundError
