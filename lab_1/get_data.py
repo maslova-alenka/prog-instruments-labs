@@ -46,8 +46,8 @@ def get_data_from_years_and_weeks(folder_name: str, date: datetime.date) -> list
         FileNotFoundError: Folder with .csv files is missing
 
     Returns:
-        list[str] or None: list[str] or None: returns list[str] if data for the date was found, or returns None on
-        failure
+        list[str] or None: list[str] or None: returns list[str] if data for the
+        date was found, or returns None on failure
     """
     if os.path.exists(folder_name):
         index = -1
@@ -77,8 +77,8 @@ def get_data(file_name: str, date: datetime.date) -> list[str] or None:
         FileNotFoundError: .csv file is missing
 
     Returns:
-        list[str] or None: list[str] or None: returns list[str] if data for the date was found, or returns None on
-        failure
+        list[str] or None: list[str] or None: returns list[str] if data for the
+        date was found, or returns None on failure
     """
     if os.path.exists(file_name):
         with open(file_name, "r", encoding="utf-8") as csv_file:
@@ -114,10 +114,15 @@ class DateIterator:
                     raise StopIteration
                 elif self.counter < len(reader_object):
                     self.counter += 1
-                    output = (reader_object[self.counter - 1][0], reader_object[self.counter - 1][1],
-                              reader_object[self.counter - 1][2], reader_object[self.counter - 1][3],
-                              reader_object[self.counter - 1][4], reader_object[self.counter - 1][5],
-                              reader_object[self.counter - 1][6])
+                    output = (
+                        reader_object[self.counter - 1][0],
+                        reader_object[self.counter - 1][1],
+                        reader_object[self.counter - 1][2],
+                        reader_object[self.counter - 1][3],
+                        reader_object[self.counter - 1][4],
+                        reader_object[self.counter - 1][5],
+                        reader_object[self.counter - 1][6]
+                    )
                     return output
         else:
             raise FileNotFoundError
