@@ -1,7 +1,16 @@
 import csv
+import logging
 import os
 
 from typing import NoReturn
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler()
+    ]
+)
 
 
 def name_for_file(first_part: str, second_part: str) -> str:
@@ -48,8 +57,11 @@ def data_to_years(file_name: str) -> NoReturn:
         TypeError: No such file exists
     """
     if os.path.exists(file_name):
+        logging.info(f"Reading data from file: {file_name}")
         if not os.path.exists("data_to_years_output"):
             os.mkdir("data_to_years_output")
+            logging.info("Created directory for output files.")
+
         with (open(file_name, "r", encoding="utf-8") as csvfile):
             reader_object = list(csv.reader(csvfile, delimiter=","))
             output = []
@@ -76,6 +88,7 @@ def data_to_years(file_name: str) -> NoReturn:
                             current_year += get_year_from_data(reader_object, i) - get_year_from_data(output, 0)
                             for j in output:
                                 writer.writerow(j)
+                            logging.info(f"Writing data to file")
                             output = []
                             first_part_of_name = reader_object[i][0]
                             output.append(reader_object[i])
@@ -88,7 +101,9 @@ def data_to_years(file_name: str) -> NoReturn:
                             writer = csv.writer(csv_file, lineterminator="\n")
                             for j in output:
                                 writer.writerow(j)
+                            logging.info(f"Writing data to file")
     else:
+        logging.error(f"Error: file {file_name} not found.")
         raise FileNotFoundError
 
 
@@ -97,4 +112,4 @@ if __name__ == "__main__":
         file_name = "result.csv"
         data_to_years(file_name)
     except FileNotFoundError:
-        print("No such file exists!")
+        logging.error("Error: file does not exist!")
