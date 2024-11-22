@@ -44,7 +44,7 @@ def get_data_from_x_y(file_name_x: str, file_name_y: str, date: datetime.date) -
             elif index == -1:
                 logging.warning(f"No data found for date {date}")
                 return None
-    logging.error("FileNotFoundError: One or both of the files are missing")
+    logging.error("FileNotFoundError: One or both of the files are missing.")
     raise FileNotFoundError
 
 
