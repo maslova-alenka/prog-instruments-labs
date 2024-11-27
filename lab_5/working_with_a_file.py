@@ -13,11 +13,11 @@ def read_json(path: str) -> dict:
     try:
         with open(path, 'r', encoding='UTF-8') as file:
             data = json.load(file)
-        return data
     except FileNotFoundError:
         print(f"The file '{path}' was not found.")
     except Exception as e:
         print(f"An error occurred while reading the JSON file: {str(e)}")
+    return data
 
 
 def write_file(path: str, data: list) -> None:
