@@ -89,6 +89,6 @@ def graphing(original_hash: str, bins: list, last_digit: int) -> None:
 if __name__ == "__main__":
     setting = working_with_a_file.read_json("parametrs_card.json")
     number = working_with_a_file.read_json("card.json")
-    print(f"The card number is correct: {luhn_algorithm(number["card_number"])}")
+    #print(f"The card number is correct: {luhn_algorithm(number["card_number"])}")
     graphing(setting["hash"], setting["bins"], setting["last_numbers"])
     get_card_number(setting["hash"], setting["bins"], setting["last_numbers"])
